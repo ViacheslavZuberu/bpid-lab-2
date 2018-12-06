@@ -1,3 +1,5 @@
+var PORT = process.env.PORT || 5000;
+
 const express = require("express");
 const NodeRSA = require("node-rsa");
 
@@ -23,6 +25,6 @@ app.get("/decrypt", function(req, res) {
   res.send(key.decryptPublic(encrypted, "utf8"));
 });
 
-app.listen(3012, function() {
+app.listen(PORT, function() {
   console.log("API is started!");
 });
