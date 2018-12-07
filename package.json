@@ -2,7 +2,7 @@
   "name": "bpid_lab_2",
   "version": "1.0.0",
   "description": "The second lab for bpid",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
   "author": "Viacheslav Sheviakov",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "node-rsa": "^1.0.1"
   }
