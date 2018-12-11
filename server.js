@@ -7,13 +7,21 @@ const NodeRSA = require("node-rsa");
 var app = express();
 var key = new NodeRSA({ b: 1024 });
 
+var data = [];
+
 app.use(bodyPaeser.json());
 app.use(bodyPaeser.urlencoded({ extended: true }));
 
 var publicKey = key.exportKey("pkcs8-public-pem");
 
 app.get("/", function(req, res) {
-    res.send("Data Protection Lab #2 v0.5");
+    var result = "";
+
+    for (var i = data.length - 1; i >= 0; i--) {
+        result += data[i] + "<br>";
+    }
+
+    res.send("Data Protection Lab #2 v0.5<br>" + result);
 });
 
 app.get("/regen_key", function(req, res) {
@@ -46,6 +54,7 @@ app.get("/test", function(req, res) {
 
 app.post("/message", function(req, res) {
     var message = key.decrypt(req.body.encrypted_message, "utf8");
+    data.push(new Date().toISOString() + " " + message);
     res.send({
         message_count_letter: message.length,
         message_count_words: message.split(" ").length,
