@@ -42,7 +42,7 @@ app.post("/reg", (req, res, next) => {
         my_number: user.number,
         g: localDatabase.g,
         p: localDatabase.p,
-        username: req.body.username
+        username: req.body
     });
 });
 
