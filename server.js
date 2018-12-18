@@ -41,8 +41,7 @@ app.post("/reg", (req, res, next) => {
     res.status(201).json({
         my_number: user.number,
         g: localDatabase.g,
-        p: localDatabase.p,
-        username: req.body
+        p: localDatabase.p
     });
 });
 
