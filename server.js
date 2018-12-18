@@ -23,6 +23,14 @@ app = express();
 app.use(bodyPaeser.json());
 app.use(bodyPaeser.urlencoded({ extended: true }));
 
+app.get("/", (req, res, next) => {
+    res.status(200).json({
+        project_type: "Lab",
+        lab_number: 3,
+        version: "v0.3"
+    });
+});
+
 app.post("/reg", (req, res, next) => {
     let user = {
         username: req.body.username,
@@ -33,6 +41,18 @@ app.post("/reg", (req, res, next) => {
         my_number: user.number,
         g: localDatabase.g,
         p: localDatabase.p
+    });
+});
+
+app.post("/send", (req, res, next) => {
+    let message = {
+        sender: req.body.sender,
+        sender_number: req.body.sender_number,
+        encrypted_message: req.body.encrypted_message
+    };
+    localDatabase.messages.push(message);
+    res.status(201).json({
+        status: "OK"
     });
 });
 
