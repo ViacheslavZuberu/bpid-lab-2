@@ -4,6 +4,7 @@
   "description": "The second lab for bpid",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +17,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "node-rsa": "^1.0.1"
+    "node-rsa": "^1.0.1",
+    "random-number": "0.0.9"
   }
 }
