@@ -27,7 +27,7 @@ app.get("/", (req, res, next) => {
     res.status(200).json({
         project_type: "Lab",
         lab_number: 3,
-        version: "v0.5",
+        version: "v0.6",
         local_database: localDatabase
     });
 });
@@ -41,7 +41,8 @@ app.post("/reg", (req, res, next) => {
     res.status(201).json({
         my_number: user.number,
         g: localDatabase.g,
-        p: localDatabase.p
+        p: localDatabase.p,
+        username: req.body.username
     });
 });
 
