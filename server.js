@@ -27,7 +27,8 @@ app.get("/", (req, res, next) => {
     res.status(200).json({
         project_type: "Lab",
         lab_number: 3,
-        version: "v0.3"
+        version: "v0.3",
+        local_database: localDatabase
     });
 });
 
@@ -54,6 +55,13 @@ app.post("/send", (req, res, next) => {
     res.status(201).json({
         status: "OK"
     });
+});
+
+app.get("/sync", (req, res, next) => {
+    let messages = localDatabase.messages;
+    localDatabase.messages = [];
+    localDatabase.archived_messages.push(messages);
+    res.status(200).json(messages);
 });
 
 app.listen(PORT, function() {
