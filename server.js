@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyPaeser = require("body-parser");
+const bodyParser = require("body-parser");
 const random = require("random-number");
 
 const PORT = process.env.PORT || 5000;
@@ -20,8 +20,8 @@ let localDatabase = {
 
 app = express();
 
-app.use(bodyPaeser.json());
-app.use(bodyPaeser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res, next) => {
     res.status(200).json({
@@ -32,7 +32,7 @@ app.get("/", (req, res, next) => {
     });
 });
 
-app.post("/reg", (req, res, next) => {
+app.post("/reg", (req, res) => {
     let user = {
         username: req.body.username,
         number: random(randomOptions)
@@ -45,7 +45,7 @@ app.post("/reg", (req, res, next) => {
     });
 });
 
-app.post("/send", (req, res, next) => {
+app.post("/send", (req, res) => {
     let message = {
         sender: req.body.sender,
         sender_number: req.body.sender_number,
@@ -57,7 +57,7 @@ app.post("/send", (req, res, next) => {
     });
 });
 
-app.get("/sync", (req, res, next) => {
+app.get("/sync", (req, res) => {
     let messages = localDatabase.messages;
     localDatabase.messages = [];
     localDatabase.archived_messages.push(messages);
@@ -66,5 +66,4 @@ app.get("/sync", (req, res, next) => {
 
 app.listen(PORT, function() {
     console.log("API is started on port " + PORT);
-    console.info("Local Database: ", localDatabase);
 });
